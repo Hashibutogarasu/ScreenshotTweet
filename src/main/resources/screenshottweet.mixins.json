@@ -1,14 +1,13 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.Hashibutogarasu.screenshottweet.mixin",
+  "package": "com.hashibutogarasu.screenshottweet.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
 
   ],
   "client": [
-    "ExampleMixin",
-    "ClientMixin"
+    "TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
