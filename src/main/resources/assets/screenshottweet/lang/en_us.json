@@ -6,15 +6,15 @@
   "screenshottweet.gui.openimage" : "Open Image",
   "screenshottweet.gui.imagescount" : "Image Count:",
   "screenshottweet.gui.imagescountdefault" : "0",
-  "screenshottweet.gui.apikey" : "Api Key",
-  "screenshottweet.gui.apikeysecret" : "Api Key Secret",
-  "screenshottweet.gui.accesstoken" : "Access Token",
-  "screenshottweet.gui.accesstokensecret" : "Access Token Secret",
-  "screenshottweet.gui.cancelandback" : "Quit",
+  "category.screenshottweet.general" : "General",
+  "option.screenshottweet.apikey" : "ApiKey",
+  "option.screenshottweet.apikeysecret" : "ApiKey Secret",
+  "option.screenshottweet.accesstoken" : "Access Token",
+  "option.screenshottweet.accesstokensecret" : "Access Token Secret",
+  "screenshottweet.gui.cancelandback" : "Cancel",
   "screenshottweet.gui.oauthandsave" : "Oauth And Save",
   "screenshottweet.gui.loginsuccess" : "Logged as %s",
   "screenshottweet.gui.loginfailed" : "Failed to Oauth",
   "screenshottweet.gui.successtweet" : "Success to Tweet",
   "screenshottweet.gui.failedtweet" : "Failed to Tweet"
-
 }

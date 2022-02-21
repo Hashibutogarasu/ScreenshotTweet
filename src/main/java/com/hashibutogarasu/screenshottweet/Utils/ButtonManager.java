@@ -1,4 +1,4 @@
-package com.Hashibutogarasu.screenshottweet.Utils;
+package com.hashibutogarasu.screenshottweet.Utils;
 
 import io.github.cottonmc.cotton.gui.widget.WButton;
 
@@ -25,7 +25,7 @@ public class ButtonManager {
 
         for (WButton button:ButtonLists) {
             if(button.isEnabled()){
-                buttons[(int) ButtonLists.stream().count()] = button;
+                buttons[ButtonLists.size()] = button;
             }
         }
 

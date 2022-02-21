@@ -1,4 +1,4 @@
-package com.Hashibutogarasu.screenshottweet;
+package com.hashibutogarasu.screenshottweet;
 
 import java.util.ArrayList;
 

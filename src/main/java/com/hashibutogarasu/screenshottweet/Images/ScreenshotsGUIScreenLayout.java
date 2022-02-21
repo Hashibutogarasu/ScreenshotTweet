@@ -1,4 +1,4 @@
-package com.Hashibutogarasu.screenshottweet.Images;
+package com.hashibutogarasu.screenshottweet.Images;
 
 import io.github.cottonmc.cotton.gui.widget.*;
 import net.minecraft.text.TranslatableText;

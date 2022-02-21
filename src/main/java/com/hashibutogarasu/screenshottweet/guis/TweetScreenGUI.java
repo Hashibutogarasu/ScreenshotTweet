@@ -1,7 +1,6 @@
 package com.hashibutogarasu.screenshottweet.guis;
 
 import com.hashibutogarasu.screenshottweet.FileObjects;
-import com.hashibutogarasu.screenshottweet.Images.ScreenshotsGUIImagesScreenLayout;
 import com.hashibutogarasu.screenshottweet.Images.ScreenshotsGUIScreenLayout;
 import com.hashibutogarasu.screenshottweet.Threads.OpenURl;
 import com.hashibutogarasu.screenshottweet.Threads.TwitterThread;
@@ -112,7 +111,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
         WButton statusimage = new WButton();
         Icon statusicon = new TextureIcon(new Identifier("screenshottweet:textures/gui/loading.png"));
         statusimage.setIcon(statusicon);
-        root.add(statusimage,18,4,1,3);
+        root.add(statusimage,19,4,1,3);
 
         WButton clearimagesbutton = new WButton();
         Icon icon = new TextureIcon(new Identifier("screenshottweet:textures/gui/trash.png"));
@@ -124,7 +123,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
             th.start();
         });
 
-        root.add(clearimagesbutton,19 ,4 , 1 , 3);
+        root.add(clearimagesbutton,18,4 , 1 , 3);
 
         WLabel imagescountlabel = new WLabel(new TranslatableText("screenshottweet.gui.imagescount"));
         root.add(imagescountlabel, 13, 6);

@@ -1,0 +1,20 @@
+{
+  "screenshottweet.gui.tweetbutton" : "ツイート",
+  "screenshottweet.gui.settingsbutton" : "APIキーの設定",
+  "screenshottweet.gui.title" : "ツイート",
+  "screenshottweet.gui.addimage" : "画像を追加",
+  "screenshottweet.gui.openimage" : "画像を開く",
+  "screenshottweet.gui.imagescount" : "画像数:",
+  "screenshottweet.gui.imagescountdefault" : "0",
+  "category.screenshottweet.general" : "General",
+  "option.screenshottweet.apikey" : "ApiKey",
+  "option.screenshottweet.apikeysecret" : "ApiKey Secret",
+  "option.screenshottweet.accesstoken" : "Access Token",
+  "option.screenshottweet.accesstokensecret" : "Access Token Secret",
+  "screenshottweet.gui.cancelandback" : "キャンセル",
+  "screenshottweet.gui.oauthandsave" : "認証して保存",
+  "screenshottweet.gui.loginsuccess" : "%s\nとしてログインしました。",
+  "screenshottweet.gui.loginfailed" : "認証に失敗しました。",
+  "screenshottweet.gui.successtweet" : "ツイートに成功しました。",
+  "screenshottweet.gui.failedtweet" : "ツイートに失敗しました。"
+}

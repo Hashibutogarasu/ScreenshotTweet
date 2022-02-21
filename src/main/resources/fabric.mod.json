@@ -2,8 +2,7 @@
   "schemaVersion": 1,
   "id": "screenshottweet",
   "version": "${version}",
-
-  "name": "ScreenshotTweet",
+  "name": "Screenshot Tweet",
   "description": "You can Tweet Minecraft screenshots in the game.",
   "authors": [
     "Hashibutogarasu"
@@ -12,24 +11,19 @@
     "homepage": "",
     "sources": ""
   },
-
   "license": "CC0-1.0",
   "icon": "assets/screenshottweet/textures/icon.png",
-
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
-    "main": [
-      "com.Hashibutogarasu.screenshottweet.ScreenshotTweetMod"
-    ],
     "client": [
-      "com.Hashibutogarasu.screenshottweet.ScreenshotTweetModClient"
+      "com.hashibutogarasu.screenshottweet.ScreenshotTweetModClient"
+    ],
+    "modmenu": [
+      "com.hashibutogarasu.screenshottweet.ModmenuIntegration"
     ]
   },
-  "modmenu": [
-    "com.Hashibutogarasu.screenshottweet.guis.Configs.ScreenshotTweetModMenuIntegration"
-  ],
   "mixins": [
-    "modid.mixins.json"
+    "screenshottweet.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.12.12",
