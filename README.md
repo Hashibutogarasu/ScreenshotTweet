@@ -4,6 +4,6 @@
 右側のテキストエリアにツイートしたい文字を入れることでツイートができます。
 
 必要なJavaランタイムのバージョンはJava17です。
-このModは<a href="https://www.curseforge.com/minecraft/mc-mods/libgui">LibGui</a>
-<a href="https://www.curseforge.com/minecraft/mc-mods/Cloth-config/">Cloth Config></a>
+このModは<p><a href="https://www.curseforge.com/minecraft/mc-mods/libgui">LibGui</a></p>
+<p><a href="https://www.curseforge.com/minecraft/mc-mods/Cloth-config/">Cloth Config</a></p>
 を前提Modにしています。
