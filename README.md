@@ -5,4 +5,5 @@
 
 必要なJavaランタイムのバージョンはJava17です。
 このModは<a href="https://www.curseforge.com/minecraft/mc-mods/libgui">LibGui</a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/Cloth-config/">Cloth Config></a>
 を前提Modにしています。
