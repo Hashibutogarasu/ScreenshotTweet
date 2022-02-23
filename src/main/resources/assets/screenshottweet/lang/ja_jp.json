@@ -6,6 +6,8 @@
   "screenshottweet.gui.openimage" : "画像を開く",
   "screenshottweet.gui.imagescount" : "画像数:",
   "screenshottweet.gui.imagescountdefault" : "0",
+  "category.screenshottweet.keybinds" : "Screenshot Tweet",
+  "key.screenshottweet.tweet" : "ツイート",
   "category.screenshottweet.general" : "General",
   "option.screenshottweet.apikey" : "ApiKey",
   "option.screenshottweet.apikeysecret" : "ApiKey Secret",
