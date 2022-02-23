@@ -1,5 +1,6 @@
 package com.hashibutogarasu.screenshottweet.guis;
 
+import com.hashibutogarasu.screenshottweet.Custom.CustomTextField;
 import com.hashibutogarasu.screenshottweet.FileObjects;
 import com.hashibutogarasu.screenshottweet.Images.ScreenshotsGUIScreenLayout;
 import com.hashibutogarasu.screenshottweet.Threads.OpenURl;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
+import static com.hashibutogarasu.screenshottweet.Ids.Identifiers.*;
+
 public class TweetScreenGUI extends LightweightGuiDescription
 {
     public static String Fullpath = "";
@@ -30,14 +33,17 @@ public class TweetScreenGUI extends LightweightGuiDescription
     public static ArrayList<String> tweetimagedata;
     public static ArrayList<String> tweetimagelist;
     public static ButtonManager buttonManager = new ButtonManager();
-    public static WTextField tweettext = new WTextField();
+    public static CustomTextField tweettext = new CustomTextField();
+    public static WSprite loadingstatusimage = new WSprite(4,frame0,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame9,frame10,frame11,frame12,frame13,frame14,frame15);
+    public static WSprite statusimage = new WSprite(none);
+    public static WGridPanel root = new WGridPanel();
 
     public TweetScreenGUI(String path)
     {
         FileObjects fileObjects = new FileObjects();
         buttonManager = new ButtonManager();
 
-        WGridPanel root = new WGridPanel();
+        root = new WGridPanel();
         setRootPanel(root);
         root.setSize(390, 200);
 
@@ -93,33 +99,31 @@ public class TweetScreenGUI extends LightweightGuiDescription
         list.setListItemHeight(2*18);
         root.add(list, 0, 2, 12, 9);
 
-        tweettext = new WTextField();
+        tweettext = new CustomTextField();
         tweettext.setMaxLength(100);
         root.add(tweettext, 13, 2, 7, 12);
+
+        statusimage = new WSprite(none);
+        root.add(statusimage,19,4,1,1);
 
         tweetbutton = new WButton();
         tweetbutton.setLabel(new TranslatableText("screenshottweet.gui.tweetbutton"));
 
         tweetbutton.setOnClick(()->{
-            TwitterThread threadRun = new TwitterThread(true);
-            Thread th = new Thread(threadRun);
+            TwitterThread twitterThread = new TwitterThread(true);
+            Thread th = new Thread(twitterThread);
             th.start();
         });
 
         root.add(tweetbutton, 13, 4, 5, 7);
-
-        WButton statusimage = new WButton();
-        Icon statusicon = new TextureIcon(new Identifier("screenshottweet:textures/gui/loading.png"));
-        statusimage.setIcon(statusicon);
-        root.add(statusimage,19,4,1,3);
 
         WButton clearimagesbutton = new WButton();
         Icon icon = new TextureIcon(new Identifier("screenshottweet:textures/gui/trash.png"));
         clearimagesbutton.setIcon(icon);
 
         clearimagesbutton.setOnClick(()->{
-            TwitterThread threadRun = new TwitterThread(false);
-            Thread th = new Thread(threadRun);
+            TwitterThread twitterThread = new TwitterThread(false);
+            Thread th = new Thread(twitterThread);
             th.start();
         });
 
