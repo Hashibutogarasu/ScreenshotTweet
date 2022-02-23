@@ -10,6 +10,7 @@ import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.icon.Icon;
 import io.github.cottonmc.cotton.gui.widget.icon.TextureIcon;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -38,7 +39,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
     public static WSprite statusimage = new WSprite(none);
     public static WGridPanel root = new WGridPanel();
 
-    public TweetScreenGUI(String path)
+    public TweetScreenGUI()
     {
         FileObjects fileObjects = new FileObjects();
         buttonManager = new ButtonManager();
@@ -47,7 +48,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
         setRootPanel(root);
         root.setSize(390, 200);
 
-        WLabel ScreenTitle = new WLabel(new TranslatableText("screenshottweet.gui.title"));
+        WLabel ScreenTitle = new WLabel(new TranslatableText("screenshottweet.gui.tweetscreen.title"));
         root.add(ScreenTitle,1,1);
 
         ArrayList<String> data = new ArrayList<>();
@@ -72,8 +73,8 @@ public class TweetScreenGUI extends LightweightGuiDescription
             String FullDir = Fullpath.replace(Paths.get(Fullpath).getFileName().toString(),"");
 
             destination.label.setText(new LiteralText(s));
-            destination.AddButton.setLabel(new TranslatableText("screenshottweet.gui.addimage"));
-            destination.OpenButton.setLabel(new TranslatableText("screenshottweet.gui.openimage"));
+            destination.AddButton.setLabel(new TranslatableText("screenshottweet.gui.tweetscreen.button.addimage"));
+            destination.OpenButton.setLabel(new TranslatableText("screenshottweet.gui.tweetscreen.button.openimage"));
 
             buttonManager.add(destination.AddButton);
 
@@ -107,7 +108,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
         root.add(statusimage,19,4,1,1);
 
         tweetbutton = new WButton();
-        tweetbutton.setLabel(new TranslatableText("screenshottweet.gui.tweetbutton"));
+        tweetbutton.setLabel(new TranslatableText("screenshottweet.gui.tweetscreen.button.tweetbutton"));
 
         tweetbutton.setOnClick(()->{
             TwitterThread twitterThread = new TwitterThread(true);
@@ -129,11 +130,20 @@ public class TweetScreenGUI extends LightweightGuiDescription
 
         root.add(clearimagesbutton,18,4 , 1 , 3);
 
-        WLabel imagescountlabel = new WLabel(new TranslatableText("screenshottweet.gui.imagescount"));
-        root.add(imagescountlabel, 13, 6);
+        WLabel imagescountlabel = new WLabel(new TranslatableText("screenshottweet.gui.tweetscreen.label.imagescount"));
+        root.add(imagescountlabel, 13, 9);
+
+        WButton oauthsetting = new WButton();
+        oauthsetting.setLabel(new TranslatableText("screenshottweet.gui.tweetscreen.button.oauth"));
+
+        oauthsetting.setOnClick(()->{
+            MinecraftClient.getInstance().setScreen(new OauthScreen(new OauthScreenGUI()));
+        });
+
+        root.add(oauthsetting, 13, 7,7,10);
 
         imagescount = new WLabel("0");
-        root.add(imagescount, 17, 6, 7, 7);
+        root.add(imagescount, 17, 9, 7, 7);
 
         root.validate(this);
     }
