@@ -2,6 +2,7 @@ package com.hashibutogarasu.screenshottweet.guis;
 
 import com.hashibutogarasu.screenshottweet.Custom.CustomTextField;
 import com.hashibutogarasu.screenshottweet.FileObjects;
+import com.hashibutogarasu.screenshottweet.Ids.Id;
 import com.hashibutogarasu.screenshottweet.Images.ScreenshotsGUIScreenLayout;
 import com.hashibutogarasu.screenshottweet.Threads.OpenURl;
 import com.hashibutogarasu.screenshottweet.Threads.TwitterThread;
@@ -45,11 +46,9 @@ public class TweetScreenGUI extends LightweightGuiDescription
         buttonManager = new ButtonManager();
 
         root = new WGridPanel();
+        root.setSize(300, 200);
         setRootPanel(root);
-        root.setSize(390, 200);
 
-        WLabel ScreenTitle = new WLabel(new TranslatableText("screenshottweet.gui.tweetscreen.title"));
-        root.add(ScreenTitle,1,1);
 
         ArrayList<String> data = new ArrayList<>();
         ArrayList<String> imgdata = new ArrayList<>();
@@ -130,9 +129,6 @@ public class TweetScreenGUI extends LightweightGuiDescription
 
         root.add(clearimagesbutton,18,4 , 1 , 3);
 
-        WLabel imagescountlabel = new WLabel(new TranslatableText("screenshottweet.gui.tweetscreen.label.imagescount"));
-        root.add(imagescountlabel, 13, 9);
-
         WButton oauthsetting = new WButton();
         oauthsetting.setLabel(new TranslatableText("screenshottweet.gui.tweetscreen.button.oauth"));
 
@@ -140,10 +136,16 @@ public class TweetScreenGUI extends LightweightGuiDescription
             MinecraftClient.getInstance().setScreen(new OauthScreen(new OauthScreenGUI()));
         });
 
-        root.add(oauthsetting, 13, 7,7,10);
+        root.add(oauthsetting, 13, 6,7,10);
+
+        WLabel imagescountlabel = new WLabel(new TranslatableText("screenshottweet.gui.tweetscreen.label.imagescount"));
+        root.add(imagescountlabel, 13, 8);
 
         imagescount = new WLabel("0");
-        root.add(imagescount, 17, 9, 7, 7);
+        root.add(imagescount, 17, 8, 7, 7);
+
+        WLabel loggedaccountlabel = new WLabel(new TranslatableText("screenshottweet.gui.oauthscreen.loggedas", Id.Screenname));
+        root.add(loggedaccountlabel, 13, 9);
 
         root.validate(this);
     }

@@ -30,7 +30,7 @@ public class ScreenshotTweetModClient implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
-                MinecraftClient.getInstance().setScreen(new Tweetscreen(new TweetScreenGUI(Paths.get("screenshots").toAbsolutePath().toString())));//GUI呼び出し
+                MinecraftClient.getInstance().setScreen(new Tweetscreen(new TweetScreenGUI()));
             }
         });
     }

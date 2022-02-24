@@ -1,10 +1,16 @@
 {
-  "screenshottweet.gui.tweetbutton" : "ツイート",
   "screenshottweet.gui.settingsbutton" : "APIキーの設定",
-  "screenshottweet.gui.title" : "ツイート",
-  "screenshottweet.gui.addimage" : "画像を追加",
-  "screenshottweet.gui.openimage" : "画像を開く",
-  "screenshottweet.gui.imagescount" : "画像数:",
+  "screenshottweet.gui.tweetscreen.title" : "ツイート",
+  "screenshottweet.gui.oauthscreen.title" : "認証",
+  "screenshottweet.gui.tweetscreen.button.tweetbutton" : "ツイート",
+  "screenshottweet.gui.tweetscreen.button.addimage" : "画像を追加",
+  "screenshottweet.gui.tweetscreen.button.openimage" : "画像を開く",
+  "screenshottweet.gui.tweetscreen.label.imagescount" : "画像数:",
+  "screenshottweet.gui.tweetscreen.label.imagescountdefault" : "0",
+  "screenshottweet.gui.tweetscreen.button.oauth" : "認証",
+  "screenshottweet.gui.oauthscreen.button.oauthbutton" : "リンクをブラウザで開く",
+  "screenshottweet.gui.oauthscreen.button.oauthbutton.oauth" : "認証",
+  "screenshottweet.gui.oauthscreen.button.pinlabel" : "PIN",
   "screenshottweet.gui.imagescountdefault" : "0",
   "category.screenshottweet.keybinds" : "Screenshot Tweet",
   "key.screenshottweet.tweet" : "ツイート",
@@ -16,7 +22,7 @@
   "screenshottweet.gui.cancelandback" : "キャンセル",
   "screenshottweet.gui.oauthandsave" : "認証して保存",
   "screenshottweet.gui.loginsuccess" : "%s\nとしてログインしました。",
-  "screenshottweet.gui.loginfailed" : "認証に失敗しました。",
-  "screenshottweet.gui.successtweet" : "ツイートに成功しました。",
-  "screenshottweet.gui.failedtweet" : "ツイートに失敗しました。"
+  "screenshottweet.gui.oauthscreen.loggedas" : "%sとしてログイン中",
+  "screenshottweet.gui.oauthscreen.oauthloggedas" : "%s",
+  "gui.screenshottweet.title" : "Screenshot Tweetの設定"
 }

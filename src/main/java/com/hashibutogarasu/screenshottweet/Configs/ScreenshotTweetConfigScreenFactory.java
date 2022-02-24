@@ -5,6 +5,9 @@ import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.TranslatableText;
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -15,7 +18,17 @@ public class ScreenshotTweetConfigScreenFactory {
     public static AtomicReference<String> twitteraccesstoken;
     public static AtomicReference<String> twitteraccesstokensecret;
 
-    public ScreenshotTweetConfigScreenFactory() { }
+    public static ConfigurationBuilder cb = new ConfigurationBuilder();
+    public static TwitterFactory tf = new TwitterFactory(cb.build());
+    public static Twitter twitter = tf.getInstance();
+
+    public ScreenshotTweetConfigScreenFactory() {
+        cb.setDebugEnabled(true)
+                .setOAuthConsumerKey(ScreenshotTweetConfigScreenFactory.twitterkeyconfig.apikey)
+                .setOAuthConsumerSecret(ScreenshotTweetConfigScreenFactory.twitterkeyconfig.apikeysecret)
+                .setOAuthAccessToken(ScreenshotTweetConfigScreenFactory.twitterkeyconfig.accesstoken)
+                .setOAuthAccessTokenSecret(ScreenshotTweetConfigScreenFactory.twitterkeyconfig.accesstokensecret);
+    }
 
     public static Screen genConfig(Screen parent){
 
@@ -41,6 +54,7 @@ public class ScreenshotTweetConfigScreenFactory {
                 twitterkeyconfig.accesstoken = twitteraccesstoken.get();
                 twitterkeyconfig.accesstokensecret = twitteraccesstokensecret.get();
                 twitterkeyconfig.save();
+                twitterkeyconfig.load();
             }
             catch(Exception ignored){
 

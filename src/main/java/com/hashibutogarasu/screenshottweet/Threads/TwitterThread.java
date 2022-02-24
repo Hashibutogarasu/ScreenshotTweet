@@ -1,7 +1,11 @@
 package com.hashibutogarasu.screenshottweet.Threads;
 
 import com.hashibutogarasu.screenshottweet.Configs.ScreenshotTweetConfigScreenFactory;
+import com.hashibutogarasu.screenshottweet.Ids.Id;
 import com.hashibutogarasu.screenshottweet.ScreenshotTweetModClient;
+import io.github.cottonmc.cotton.gui.widget.WSprite;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.text.TranslatableText;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
@@ -9,10 +13,34 @@ import twitter4j.conf.ConfigurationBuilder;
 import java.io.File;
 import java.util.ArrayList;
 
+import static com.hashibutogarasu.screenshottweet.Ids.Identifiers.*;
 import static com.hashibutogarasu.screenshottweet.guis.TweetScreenGUI.*;
 
-public class TwitterThread implements Runnable {
-    public TwitterThread(boolean tweet){
+public class TwitterThread extends Thread {
+    private boolean tweet = false;
+
+    public TwitterThread(boolean tweets){
+        tweet = tweets;
+    }
+
+    @Override
+    public void run(){
+        if(!tweet || (tweetimagelist != null && tweetimagedata != null)){
+
+            if(tweetimagelist != null && tweetimagedata != null){
+                tweetimagelist.clear();
+                tweetimagedata.clear();
+            }
+
+            imagescount.setText(new TranslatableText("screenshottweet.gui.imagescountdefault"));
+            buttonManager.setEnabled(true);
+
+            return;
+        }
+
+        loadingstatusimage = new WSprite(4,frame0,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame9,frame10,frame11,frame12,frame13,frame14,frame15);
+        root.add(loadingstatusimage,19,4,1,1);
+
         try {
             tweetimagelist = new ArrayList<>();
 
@@ -23,10 +51,6 @@ public class TwitterThread implements Runnable {
             }
 
             ScreenshotTweetModClient.LOGGER.info("Tweet:" + tweettext.getText());
-
-            for (String imagelist : tweetimagelist) {
-                ScreenshotTweetModClient.LOGGER.info(imagelist);
-            }
 
             try {
                 ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -40,7 +64,9 @@ public class TwitterThread implements Runnable {
                 TwitterFactory tf = new TwitterFactory(cb.build());
                 Twitter twitter = tf.getInstance();
 
-                ScreenshotTweetModClient.LOGGER.info("Logged in as:" + twitter.getScreenName());
+                Id.Screenname = twitter.getScreenName();
+
+                ScreenshotTweetModClient.LOGGER.info("Logged in as:" + Id.Screenname);
 
                 ArrayList<UploadedMedia> medias = new ArrayList<>();
 
@@ -78,13 +104,23 @@ public class TwitterThread implements Runnable {
 
                         Status status = twitter.updateStatus(update);
                         ScreenshotTweetModClient.LOGGER.info("Successfully updated the status to [" + status.getText() + "].");
+
+                        Thread.sleep(2000);
+                        root.remove(loadingstatusimage);
+                        statusimage.setImage(OK);
                     }
                 } else {
                     ScreenshotTweetModClient.LOGGER.info("Failed to update the status");
+                    Thread.sleep(2000);
+                    root.remove(loadingstatusimage);
+                    statusimage.setImage(FAILED);
                 }
             }catch (StringIndexOutOfBoundsException ignored) { }
             catch (TwitterException twitterException) {
                 ScreenshotTweetModClient.LOGGER.info(twitterException.getErrorMessage());
+                Thread.sleep(2000);
+                root.remove(loadingstatusimage);
+                statusimage.setImage(FAILED);
             }
 
             tweetimagelist.clear();
@@ -92,16 +128,43 @@ public class TwitterThread implements Runnable {
 
             imagescount.setText(new TranslatableText("screenshottweet.gui.imagescountdefault"));
             buttonManager.setEnabled(true);
-
-            ScreenshotTweetModClient.LOGGER.info("Images Cleared");
         }
-        catch (Exception ignored){
+        catch (Exception error){
+            root.remove(loadingstatusimage);
+            statusimage.setImage(FAILED);
+        }
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
 
         }
+
+        root.remove(loadingstatusimage);
+        statusimage.setImage(none);
     }
+    public static void Oauth(){
+        try {
+            ConfigurationBuilder cb = new ConfigurationBuilder();
 
-    @Override
-    public void run() {
+            cb.setDebugEnabled(true)
+                    .setOAuthConsumerKey(ScreenshotTweetConfigScreenFactory.twitterkeyconfig.apikey)
+                    .setOAuthConsumerSecret(ScreenshotTweetConfigScreenFactory.twitterkeyconfig.apikeysecret)
+                    .setOAuthAccessToken(ScreenshotTweetConfigScreenFactory.twitterkeyconfig.accesstoken)
+                    .setOAuthAccessTokenSecret(ScreenshotTweetConfigScreenFactory.twitterkeyconfig.accesstokensecret);
 
+            TwitterFactory tf = new TwitterFactory(cb.build());
+            Twitter twitter = tf.getInstance();
+
+            Id.Screenname = twitter.getScreenName();
+
+            ScreenshotTweetModClient.LOGGER.info("Logged in as:" + Id.Screenname);
+        }
+        catch (TwitterException e){
+
+        }
+        catch(IllegalStateException e){
+
+        }
     }
 }
