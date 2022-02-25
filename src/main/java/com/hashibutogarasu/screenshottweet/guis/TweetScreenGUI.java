@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
+import static com.hashibutogarasu.screenshottweet.Configs.ScreenshotTweetConfigScreenFactory.twitterkeyconfig;
+import static com.hashibutogarasu.screenshottweet.Ids.Id.MOD_ID;
 import static com.hashibutogarasu.screenshottweet.Ids.Identifiers.*;
 
 public class TweetScreenGUI extends LightweightGuiDescription
@@ -46,9 +48,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
         buttonManager = new ButtonManager();
 
         root = new WGridPanel();
-        root.setSize(300, 200);
         setRootPanel(root);
-
 
         ArrayList<String> data = new ArrayList<>();
         ArrayList<String> imgdata = new ArrayList<>();
@@ -72,8 +72,8 @@ public class TweetScreenGUI extends LightweightGuiDescription
             String FullDir = Fullpath.replace(Paths.get(Fullpath).getFileName().toString(),"");
 
             destination.label.setText(new LiteralText(s));
-            destination.AddButton.setLabel(new TranslatableText("screenshottweet.gui.tweetscreen.button.addimage"));
-            destination.OpenButton.setLabel(new TranslatableText("screenshottweet.gui.tweetscreen.button.openimage"));
+            destination.AddButton.setLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.button.addimage"));
+            destination.OpenButton.setLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.button.openimage"));
 
             buttonManager.add(destination.AddButton);
 
@@ -107,7 +107,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
         root.add(statusimage,19,4,1,1);
 
         tweetbutton = new WButton();
-        tweetbutton.setLabel(new TranslatableText("screenshottweet.gui.tweetscreen.button.tweetbutton"));
+        tweetbutton.setLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.button.tweetbutton"));
 
         tweetbutton.setOnClick(()->{
             TwitterThread twitterThread = new TwitterThread(true);
@@ -118,7 +118,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
         root.add(tweetbutton, 13, 4, 5, 7);
 
         WButton clearimagesbutton = new WButton();
-        Icon icon = new TextureIcon(new Identifier("screenshottweet:textures/gui/trash.png"));
+        Icon icon = new TextureIcon(new Identifier(MOD_ID + ":textures/gui/trash.png"));
         clearimagesbutton.setIcon(icon);
 
         clearimagesbutton.setOnClick(()->{
@@ -130,7 +130,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
         root.add(clearimagesbutton,18,4 , 1 , 3);
 
         WButton oauthsetting = new WButton();
-        oauthsetting.setLabel(new TranslatableText("screenshottweet.gui.tweetscreen.button.oauth"));
+        oauthsetting.setLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.button.oauth"));
 
         oauthsetting.setOnClick(()->{
             MinecraftClient.getInstance().setScreen(new OauthScreen(new OauthScreenGUI()));
@@ -138,14 +138,16 @@ public class TweetScreenGUI extends LightweightGuiDescription
 
         root.add(oauthsetting, 13, 6,7,10);
 
-        WLabel imagescountlabel = new WLabel(new TranslatableText("screenshottweet.gui.tweetscreen.label.imagescount"));
+        WLabel imagescountlabel = new WLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.label.imagescount"));
         root.add(imagescountlabel, 13, 8);
 
         imagescount = new WLabel("0");
-        root.add(imagescount, 17, 8, 7, 7);
+        root.add(imagescount, 15, 8, 7, 7);
 
-        WLabel loggedaccountlabel = new WLabel(new TranslatableText("screenshottweet.gui.oauthscreen.loggedas", Id.Screenname));
-        root.add(loggedaccountlabel, 13, 9);
+        if(twitterkeyconfig.showscreenname){
+            WLabel loggedaccountlabel = new WLabel(new TranslatableText(MOD_ID + ".gui.oauthscreen.loggedas", Id.Screenname));
+            root.add(loggedaccountlabel, 13, 9);
+        }
 
         root.validate(this);
     }

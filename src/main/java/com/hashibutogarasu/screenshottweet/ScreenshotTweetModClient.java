@@ -12,11 +12,9 @@ import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.file.Paths;
-
 public class ScreenshotTweetModClient implements ClientModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("ScreenshotTweet");
-    public static String MOD_ID = "ScreenshotTweet";
+
 
     @Override
     public void onInitializeClient() {

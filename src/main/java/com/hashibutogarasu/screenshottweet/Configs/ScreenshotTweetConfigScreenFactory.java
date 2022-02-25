@@ -11,12 +11,15 @@ import twitter4j.conf.ConfigurationBuilder;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.hashibutogarasu.screenshottweet.Ids.Id.MOD_ID;
+
 public class ScreenshotTweetConfigScreenFactory {
     public static ScreenshotTweetConfig twitterkeyconfig;
     public static AtomicReference<String> twitterapikey;
     public static AtomicReference<String> twitterapikeysecret;
     public static AtomicReference<String> twitteraccesstoken;
     public static AtomicReference<String> twitteraccesstokensecret;
+    public static AtomicReference<Boolean> showscreenname;
 
     public static ConfigurationBuilder cb = new ConfigurationBuilder();
     public static TwitterFactory tf = new TwitterFactory(cb.build());
@@ -38,14 +41,15 @@ public class ScreenshotTweetConfigScreenFactory {
             twitterapikeysecret = new AtomicReference<>(twitterkeyconfig.apikeysecret);
             twitteraccesstoken = new AtomicReference<>(twitterkeyconfig.accesstoken);
             twitteraccesstokensecret = new AtomicReference<>(twitterkeyconfig.accesstokensecret);
+            showscreenname = new AtomicReference<>(twitterkeyconfig.showscreenname);
         }
         catch (Exception ignored){
 
         }
 
         ConfigBuilder builder = ConfigBuilder.create()
-                .setParentScreen(new KeyConfigScreen(new TranslatableText("gui.screenshottweet.title")))
-                .setTitle(new TranslatableText("gui.screenshottweet.title"));
+                .setParentScreen(new KeyConfigScreen(new TranslatableText("gui." + MOD_ID + ".title")))
+                .setTitle(new TranslatableText("gui." + MOD_ID + ".title"));
 
         builder.setSavingRunnable(() -> {
             try{
@@ -53,6 +57,7 @@ public class ScreenshotTweetConfigScreenFactory {
                 twitterkeyconfig.apikeysecret = twitterapikeysecret.get();
                 twitterkeyconfig.accesstoken = twitteraccesstoken.get();
                 twitterkeyconfig.accesstokensecret = twitteraccesstokensecret.get();
+                twitterkeyconfig.showscreenname = showscreenname.get();
                 twitterkeyconfig.save();
                 twitterkeyconfig.load();
             }
@@ -61,29 +66,34 @@ public class ScreenshotTweetConfigScreenFactory {
             }
         });
 
-        ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("category.screenshottweet.general"));
+        ConfigCategory general = builder.getOrCreateCategory(new TranslatableText("category." + MOD_ID + ".general"));
         builder.setParentScreen(parent);
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-        general.addEntry(entryBuilder.startStrField(new TranslatableText("option.screenshottweet.apikey"), twitterkeyconfig.apikey)
+        general.addEntry(entryBuilder.startStrField(new TranslatableText("option." + MOD_ID + ".apikey"), twitterkeyconfig.apikey)
                 .setDefaultValue(twitterkeyconfig.apikey) // Recommended: Used when user click "Reset"
                 .setSaveConsumer(newValue -> twitterapikey.set(newValue)) // Recommended: Called when user save the config
                 .build()); // Builds the option entry for cloth config
 
-        general.addEntry(entryBuilder.startStrField(new TranslatableText("option.screenshottweet.apikeysecret"), twitterkeyconfig.apikeysecret)
+        general.addEntry(entryBuilder.startStrField(new TranslatableText("option."+ MOD_ID + ".apikeysecret"), twitterkeyconfig.apikeysecret)
                 .setDefaultValue(twitterkeyconfig.apikeysecret) // Recommended: Used when user click "Reset"
                 .setSaveConsumer(newValue -> twitterapikeysecret.set(newValue)) // Recommended: Called when user save the config
                 .build()); // Builds the option entry for cloth config
 
-        general.addEntry(entryBuilder.startStrField(new TranslatableText("option.screenshottweet.accesstoken"), twitterkeyconfig.accesstoken)
+        general.addEntry(entryBuilder.startStrField(new TranslatableText("option." + MOD_ID + ".accesstoken"), twitterkeyconfig.accesstoken)
                 .setDefaultValue(twitterkeyconfig.accesstoken) // Recommended: Used when user click "Reset"
                 .setSaveConsumer(newValue -> twitteraccesstoken.set(newValue)) // Recommended: Called when user save the config
                 .build()); // Builds the option entry for cloth config
 
-        general.addEntry(entryBuilder.startStrField(new TranslatableText("option.screenshottweet.accesstokensecret"), twitterkeyconfig.accesstokensecret)
+        general.addEntry(entryBuilder.startStrField(new TranslatableText("option."+ MOD_ID + ".accesstokensecret"), twitterkeyconfig.accesstokensecret)
                 .setDefaultValue(twitterkeyconfig.accesstokensecret) // Recommended: Used when user click "Reset"
                 .setSaveConsumer(newValue -> twitteraccesstokensecret.set(newValue)) // Recommended: Called when user save the config
                 .build()); // Builds the option entry for cloth config
+
+        general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("option."+ MOD_ID + ".showscreenname"),twitterkeyconfig.showscreenname)
+                .setDefaultValue(twitterkeyconfig.showscreenname)
+                .setSaveConsumer(newValue -> showscreenname.set(newValue))
+                .build());
 
         return builder.build();
     }

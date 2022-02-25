@@ -8,19 +8,22 @@ import net.fabricmc.loader.api.FabricLoader;
 import java.io.File;
 import java.io.IOException;
 
+import static com.hashibutogarasu.screenshottweet.Ids.Id.MOD_ID;
+
 public class ScreenshotTweetConfig {
     private transient File file;
     public String apikey = "";
     public String apikeysecret = "";
     public String accesstoken = "";
     public String accesstokensecret = "";
+    public Boolean showscreenname = true;
 
     private ScreenshotTweetConfig() { }
 
     public static ScreenshotTweetConfig load() {
         File file = new File(
                 FabricLoader.getInstance().getConfigDir().toString(),
-                ScreenshotTweetModClient.MOD_ID + ".toml"
+                MOD_ID + ".toml"
         );
 
         ScreenshotTweetConfig config;
