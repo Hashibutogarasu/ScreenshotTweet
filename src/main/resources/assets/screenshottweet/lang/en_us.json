@@ -30,6 +30,7 @@
   "screenshottweet.gui.tweetstatuslabel" : "",
   "screenshottweet.gui.tweetstatuslabel.oauth" : "Oauthing",
   "screenshottweet.gui.tweetstatuslabel.oauth.ok" : "OK",
+  "screenshottweet.gui.tweetstatuslabel.tweeting" : "Tweeting",
   "screenshottweet.gui.tweetstatuslabel.uploadingimage" : "Uploading : %s",
   "screenshottweet.gui.tweetstatuslabel.tweet.ok" : "Successfully update status",
   "screenshottweet.gui.tweetstatuslabel.tweet.failed" : "Failed to tweet",

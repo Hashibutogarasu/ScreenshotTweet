@@ -4,6 +4,7 @@ import com.hashibutogarasu.screenshottweet.Custom.CustomTextField;
 import com.hashibutogarasu.screenshottweet.FileObjects;
 import com.hashibutogarasu.screenshottweet.Ids.Id;
 import com.hashibutogarasu.screenshottweet.Images.ScreenshotsGUIScreenLayout;
+import com.hashibutogarasu.screenshottweet.Threads.Default;
 import com.hashibutogarasu.screenshottweet.Threads.OpenURl;
 import com.hashibutogarasu.screenshottweet.Threads.TwitterThread;
 import com.hashibutogarasu.screenshottweet.Utils.ButtonManager;
@@ -123,9 +124,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
         clearimagesbutton.setIcon(icon);
 
         clearimagesbutton.setOnClick(()->{
-            TwitterThread twitterThread = new TwitterThread(false);
-            Thread th = new Thread(twitterThread);
-            th.start();
+            Default.reset();
         });
 
         root.add(clearimagesbutton,18,4 , 1 , 3);
