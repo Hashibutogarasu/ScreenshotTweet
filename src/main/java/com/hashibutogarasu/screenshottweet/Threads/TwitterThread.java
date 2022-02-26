@@ -17,7 +17,7 @@ import static com.hashibutogarasu.screenshottweet.Ids.Identifiers.*;
 import static com.hashibutogarasu.screenshottweet.guis.TweetScreenGUI.*;
 
 public class TwitterThread extends Thread {
-    private boolean tweet;
+    private final boolean tweet;
     public static WLabel tweetstatuslabel = new WLabel(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel"));
     public static int defaultcolor = tweetstatuslabel.getColor();
 
@@ -65,6 +65,8 @@ public class TwitterThread extends Thread {
         }
 
         Default.reset();
+
+        tweetbutton.setEnabled(true);
 
     }
 

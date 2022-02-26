@@ -19,13 +19,17 @@ import static com.hashibutogarasu.screenshottweet.guis.TweetScreenGUI.*;
 import static com.hashibutogarasu.screenshottweet.Threads.TwitterThread.defaultcolor;
 
 public class Tweet {
-    public static void update() throws InterruptedException,TwitterException {
+
+    static ArrayList<UploadedMedia> medias;
+
+    public static void update() throws InterruptedException {
+
         tweetimagelist = new ArrayList<>();
         tweetimagelist.addAll(tweetimagedata);
 
         ScreenshotTweetModClient.LOGGER.info("Tweet:" + tweettext.getText());
 
-        ArrayList<UploadedMedia> medias = new ArrayList<>();
+        medias = new ArrayList<>();
 
         defaultcolor = tweetstatuslabel.getColor();
 
@@ -45,12 +49,15 @@ public class Tweet {
 
             Id.Screenname = twitter.getScreenName();
 
+            Thread.sleep(1000);
+
             tweetstatuslabel.setColor(Color.GREEN.getRGB());
+            tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.oauth.ok"));
 
             Thread.sleep(1000);
 
-            tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.oauth.ok"));
             tweetstatuslabel.setColor(defaultcolor);
+            tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.tweeting"));
 
             ScreenshotTweetModClient.LOGGER.info("Logged in as:" + Id.Screenname);
 
@@ -63,8 +70,6 @@ public class Tweet {
                     ScreenshotTweetModClient.LOGGER.info(e.toString());
                 }
             }
-
-            tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.tweeting"));
 
             Thread.sleep(1000);
 
@@ -111,7 +116,7 @@ public class Tweet {
                 root.remove(loadingstatusimage);
                 statusimage.setImage(FAILED);
             }
-        }catch (StringIndexOutOfBoundsException ignored) { }
+        }catch (StringIndexOutOfBoundsException | InterruptedException ignored) { }
         catch (TwitterException twitterException) {
             ScreenshotTweetModClient.LOGGER.info(twitterException.getErrorMessage());
             Thread.sleep(2000);
@@ -120,8 +125,6 @@ public class Tweet {
             tweetstatuslabel.setColor(Color.RED.getRGB());
             root.remove(loadingstatusimage);
             statusimage.setImage(FAILED);
-        } catch (InterruptedException e) {
-
         }
 
         tweetimagelist.clear();

@@ -42,7 +42,8 @@ public class TweetScreenGUI extends LightweightGuiDescription
     public static WSprite loadingstatusimage = new WSprite(4,frame0,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame9,frame10,frame11,frame12,frame13,frame14,frame15);
     public static WSprite statusimage = new WSprite(none);
     public static WGridPanel root = new WGridPanel();
-
+    ArrayList<String> data;
+    ArrayList<String> imgdata;
 
     public TweetScreenGUI()
     {
@@ -52,8 +53,8 @@ public class TweetScreenGUI extends LightweightGuiDescription
         root = new WGridPanel();
         setRootPanel(root);
 
-        ArrayList<String> data = new ArrayList<>();
-        ArrayList<String> imgdata = new ArrayList<>();
+        data = new ArrayList<>();
+        imgdata = new ArrayList<>();
         tweetimagedata = new ArrayList<>();
 
         try(Stream<Path> stream = Files.list(Paths.get("screenshots").toAbsolutePath())) {
@@ -73,24 +74,24 @@ public class TweetScreenGUI extends LightweightGuiDescription
             Fullpath = (imagedir + "/" + imagepath.getFileName().toString().replace("screenshots","/")).replace("//","/").replace("\\","/");
             String FullDir = Fullpath.replace(Paths.get(Fullpath).getFileName().toString(),"");
 
-            destination.label.setText(new LiteralText(s));
-            destination.AddButton.setLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.button.addimage"));
-            destination.OpenButton.setLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.button.openimage"));
+            ScreenshotsGUIScreenLayout.label.setText(new LiteralText(s));
+            ScreenshotsGUIScreenLayout.AddButton.setLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.button.addimage"));
+            ScreenshotsGUIScreenLayout.OpenButton.setLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.button.openimage"));
 
-            buttonManager.add(destination.AddButton);
+            buttonManager.add(ScreenshotsGUIScreenLayout.AddButton);
 
-            destination.AddButton.setOnClick(() -> {
-                if(tweetimagedata.stream().count() <= 3 && tweetimagedata.stream().count() < 4){
+            ScreenshotsGUIScreenLayout.AddButton.setOnClick(() -> {
+                if(tweetimagedata.size() <= 3){
                     tweetimagedata.add(FullDir + s);
-                    imagescount.setText(Text.of(String.valueOf(tweetimagedata.stream().count())));
+                    imagescount.setText(Text.of(String.valueOf((long) tweetimagedata.size())));
                     imgdata.add(s);
                 }
-                if(tweetimagedata.stream().count() >= 4){
+                if((long) tweetimagedata.size() >= 4){
                     buttonManager.setEnabled(false);
                 }
             });
 
-            destination.OpenButton.setOnClick(() -> {
+            ScreenshotsGUIScreenLayout.OpenButton.setOnClick(() -> {
                 OpenURl threadRun = new OpenURl("file://" + FullDir + s,true);
                 Thread th = new Thread(threadRun);
                 th.start();
@@ -123,18 +124,14 @@ public class TweetScreenGUI extends LightweightGuiDescription
         Icon icon = new TextureIcon(new Identifier(MOD_ID + ":textures/gui/trash.png"));
         clearimagesbutton.setIcon(icon);
 
-        clearimagesbutton.setOnClick(()->{
-            Default.reset();
-        });
+        clearimagesbutton.setOnClick(Default::reset);
 
         root.add(clearimagesbutton,18,4 , 1 , 3);
 
         WButton oauthsetting = new WButton();
         oauthsetting.setLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.button.oauth"));
 
-        oauthsetting.setOnClick(()->{
-            MinecraftClient.getInstance().setScreen(new OauthScreen(new OauthScreenGUI()));
-        });
+        oauthsetting.setOnClick(()-> MinecraftClient.getInstance().setScreen(new OauthScreen(new OauthScreenGUI())));
 
         root.add(oauthsetting, 13, 6,7,10);
 

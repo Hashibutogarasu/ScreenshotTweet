@@ -28,7 +28,6 @@ public class NetCheck {
 
             tweetstatuslabel.setColor(defaultcolor);
             tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel"));
-            return;
         }
     }
 }
