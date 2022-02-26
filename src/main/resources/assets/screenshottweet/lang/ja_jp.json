@@ -27,6 +27,7 @@
   "screenshottweet.gui.oauthscreen.loggedas" : "%sとしてログイン中",
   "screenshottweet.gui.oauthscreen.oauthloggedas" : "%sとしてログイン中",
   "gui.screenshottweet.title" : "Screenshot Tweetの設定",
+  "screenshottweet.gui.tweettextfield" : "",
   "screenshottweet.gui.tweetstatuslabel" : "",
   "screenshottweet.gui.tweetstatuslabel.oauth" : "認証中",
   "screenshottweet.gui.tweetstatuslabel.oauth.ok" : "認証しました",

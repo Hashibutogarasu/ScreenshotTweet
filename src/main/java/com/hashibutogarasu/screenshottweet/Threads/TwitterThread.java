@@ -1,6 +1,7 @@
 package com.hashibutogarasu.screenshottweet.Threads;
 
 import com.hashibutogarasu.screenshottweet.Configs.ScreenshotTweetConfigScreenFactory;
+import com.hashibutogarasu.screenshottweet.Custom.CustomTextField;
 import com.hashibutogarasu.screenshottweet.Ids.Id;
 import com.hashibutogarasu.screenshottweet.ScreenshotTweetModClient;
 import io.github.cottonmc.cotton.gui.widget.WLabel;
@@ -28,6 +29,7 @@ public class TwitterThread extends Thread {
     @Override
     public void run(){
 
+        tweettext.setEditable(false);
         tweetbutton.setEnabled(false);
 
         NetCheck.Checkinternetconnection();
@@ -66,8 +68,16 @@ public class TwitterThread extends Thread {
 
         Default.reset();
 
-        tweetbutton.setEnabled(true);
 
+        try {
+            tweettext.refresh();
+        }
+        catch (InterruptedException e) {
+
+        }
+
+        tweetbutton.setEnabled(true);
+        tweettext.setEditable(true);
     }
 
     public static void Oauth(){

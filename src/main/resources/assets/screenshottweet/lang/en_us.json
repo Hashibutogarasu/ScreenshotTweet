@@ -27,6 +27,7 @@
   "screenshottweet.gui.oauthscreen.loggedas" : "Loggining as %s",
   "screenshottweet.gui.oauthscreen.oauthloggedas" : "Loggining as %s",
   "gui.screenshottweet.title" : "Screenshot Tweet Settings",
+  "screenshottweet.gui.tweettextfield" : "",
   "screenshottweet.gui.tweetstatuslabel" : "",
   "screenshottweet.gui.tweetstatuslabel.oauth" : "Oauthing",
   "screenshottweet.gui.tweetstatuslabel.oauth.ok" : "OK",

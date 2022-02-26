@@ -103,7 +103,8 @@ public class TweetScreenGUI extends LightweightGuiDescription
         root.add(list, 0, 2, 12, 9);
 
         tweettext = new CustomTextField();
-        tweettext.setMaxLength(100);
+        tweettext.setMaxLength(140);
+
         root.add(tweettext, 13, 2, 7, 12);
 
         statusimage = new WSprite(none);
