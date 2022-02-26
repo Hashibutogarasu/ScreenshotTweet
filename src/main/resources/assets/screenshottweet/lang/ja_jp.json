@@ -22,7 +22,6 @@
   "option.screenshottweet.accesstokensecret" : "Access Token Secret",
   "option.screenshottweet.showscreenname" : "スクリーンネームを表示する",
   "option.screenshottweet.showlogsintweetscreen" : "ログを表示する",
-  "screenshottweet.gui.cancelandback" : "キャンセル",
   "screenshottweet.gui.oauthandsave" : "認証して保存",
   "screenshottweet.gui.loginsuccess" : "%s\nとしてログインしました。",
   "screenshottweet.gui.oauthscreen.loggedas" : "%sとしてログイン中",

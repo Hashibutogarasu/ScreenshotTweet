@@ -62,7 +62,7 @@ public class ScreenshotTweetConfigScreenFactory {
                 twitterkeyconfig.showscreenname = showscreenname.get();
                 twitterkeyconfig.showlogsintweetscreen = showlogsintweetscreen.get();
                 twitterkeyconfig.save();
-                twitterkeyconfig.load();
+                ScreenshotTweetConfig.load();
             }
             catch(Exception ignored){
 

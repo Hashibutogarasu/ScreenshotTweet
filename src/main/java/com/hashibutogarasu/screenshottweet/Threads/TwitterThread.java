@@ -19,9 +19,10 @@ import static com.hashibutogarasu.screenshottweet.Ids.Identifiers.*;
 import static com.hashibutogarasu.screenshottweet.guis.TweetScreenGUI.*;
 
 public class TwitterThread extends Thread {
-    private boolean tweet = false;
-    private WLabel tweetstatuslabel = new WLabel(new TranslatableText(MOD_ID + "gui.tweetstatuslabel"));
+    private final boolean tweet;
+    private final WLabel tweetstatuslabel = new WLabel(new TranslatableText(MOD_ID + "gui.tweetstatuslabel"));
     private int defaultcolor = 0;
+    ArrayList<UploadedMedia> medias = new ArrayList<>();
 
     public TwitterThread(boolean tweets){
         tweet = tweets;
@@ -48,11 +49,7 @@ public class TwitterThread extends Thread {
         try {
             tweetimagelist = new ArrayList<>();
 
-            for (String imagespath : tweetimagedata) {
-                if (!imagespath.isBlank() || !imagespath.isEmpty() || imagespath != null) {
-                    tweetimagelist.add(imagespath);
-                }
-            }
+            tweetimagelist.addAll(tweetimagedata);
 
             ScreenshotTweetModClient.LOGGER.info("Tweet:" + tweettext.getText());
 
@@ -85,11 +82,7 @@ public class TwitterThread extends Thread {
 
                 ScreenshotTweetModClient.LOGGER.info("Logged in as:" + Id.Screenname);
 
-                tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.oauth.ok"));
-
-                ArrayList<UploadedMedia> medias = new ArrayList<>();
-
-                if (tweetimagelist.stream().count() != 0) {
+                if ((long) tweetimagelist.size() != 0) {
                     try {
                         for (String p : tweetimagelist) {
                             medias.add(twitter.uploadMedia(new File(p)));
@@ -99,40 +92,38 @@ public class TwitterThread extends Thread {
                     }
                 }
 
-                if (tweettext.getText().length() != 0 || tweetimagelist.stream().count() >= 1) {
+                if (tweettext.getText().length() != 0 || (long) tweetimagelist.size() >= 1) {
 
                     StatusUpdate update = new StatusUpdate(tweettext.getText());
 
-                    long[] mediaIds = new long[(int) tweetimagelist.stream().count()];
+                    long[] mediaIds = new long[tweetimagelist.size()];
 
                     UploadedMedia media;
-                    if(tweet) {
-                        if (tweetimagelist.stream().count() != 0) {
-                            for (int i = 0; i < tweetimagelist.stream().count(); i++) {
-                                ScreenshotTweetModClient.LOGGER.info("Uploading...[" + i + "/" + (tweetimagelist.stream().count() - 1) + "][" + tweetimagelist.get(i) + "]");
-                                media = twitter.uploadMedia(new File(tweetimagelist.get(i)));
-                                ScreenshotTweetModClient.LOGGER.info("Uploaded: id=" + media.getMediaId()
-                                        + ", w=" + media.getImageWidth() + ", h=" + media.getImageHeight()
-                                        + ", type=" + media.getImageType() + ", size=" + media.getSize());
-                                mediaIds[i] = media.getMediaId();
+                    if ((long) tweetimagelist.size() != 0) {
+                        for (int i = 0; (long) tweetimagelist.size() > i; i++) {
+                            ScreenshotTweetModClient.LOGGER.info("Uploading...[" + i + "/" + ((long) tweetimagelist.size() - 1) + "][" + tweetimagelist.get(i) + "]");
+                            media = twitter.uploadMedia(new File(tweetimagelist.get(i)));
+                            ScreenshotTweetModClient.LOGGER.info("Uploaded: id=" + media.getMediaId()
+                                    + ", w=" + media.getImageWidth() + ", h=" + media.getImageHeight()
+                                    + ", type=" + media.getImageType() + ", size=" + media.getSize());
+                            mediaIds[i] = media.getMediaId();
 
-                                tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.uploadingimage",i));
+                            tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.uploadingimage",i));
 
-                            }
-                            update.setMediaIds(mediaIds);
                         }
-
-                        medias.clear();
-
-                        Status status = twitter.updateStatus(update);
-
-                        Thread.sleep(2000);
-                        ScreenshotTweetModClient.LOGGER.info("Successfully updated the status to [" + status.getText() + "].");
-                        tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.tweet.ok"));
-                        tweetstatuslabel.setColor(Color.GREEN.getRGB());
-                        root.remove(loadingstatusimage);
-                        statusimage.setImage(OK);
+                        update.setMediaIds(mediaIds);
                     }
+
+                    medias.clear();
+
+                    Status status = twitter.updateStatus(update);
+
+                    Thread.sleep(2000);
+                    ScreenshotTweetModClient.LOGGER.info("Successfully updated the status to [" + status.getText() + "].");
+                    tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.tweet.ok"));
+                    tweetstatuslabel.setColor(Color.GREEN.getRGB());
+                    root.remove(loadingstatusimage);
+                    statusimage.setImage(OK);
                 } else {
                     Thread.sleep(2000);
                     ScreenshotTweetModClient.LOGGER.info("Failed to update the status");
@@ -193,10 +184,7 @@ public class TwitterThread extends Thread {
 
             ScreenshotTweetModClient.LOGGER.info("Logged in as:" + Id.Screenname);
         }
-        catch (TwitterException e){
-
-        }
-        catch(IllegalStateException e){
+        catch (TwitterException | IllegalStateException ignore){
 
         }
     }
