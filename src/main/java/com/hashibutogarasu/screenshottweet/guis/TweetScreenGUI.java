@@ -42,6 +42,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
     public static WSprite statusimage = new WSprite(none);
     public static WGridPanel root = new WGridPanel();
 
+
     public TweetScreenGUI()
     {
         FileObjects fileObjects = new FileObjects();
@@ -110,8 +111,8 @@ public class TweetScreenGUI extends LightweightGuiDescription
         tweetbutton.setLabel(new TranslatableText(MOD_ID + ".gui.tweetscreen.button.tweetbutton"));
 
         tweetbutton.setOnClick(()->{
-            TwitterThread twitterThread = new TwitterThread(true);
-            Thread th = new Thread(twitterThread);
+            TwitterThread tweetThread = new TwitterThread(true);
+            Thread th = new Thread(tweetThread);
             th.start();
         });
 

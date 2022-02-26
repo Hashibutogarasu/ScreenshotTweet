@@ -32,8 +32,7 @@
   "screenshottweet.gui.tweetstatuslabel.oauth.ok" : "OK",
   "screenshottweet.gui.tweetstatuslabel.uploadingimage" : "Uploading : %s",
   "screenshottweet.gui.tweetstatuslabel.tweet.ok" : "Successfully update status",
-  "screenshottweet.gui.tweetstatuslabel.tweet.failed" : "Failed to tweet"
-
-
-
+  "screenshottweet.gui.tweetstatuslabel.tweet.failed" : "Failed to tweet",
+  "screenshottweet.gui.tweetstatuslabel.connectionerror" : "Internet Connection Error",
+  "screenshottweet.gui.tweetstatuslabel.nontexterror" : "Text is Blank"
 }
