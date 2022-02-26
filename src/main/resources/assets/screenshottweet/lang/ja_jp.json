@@ -21,10 +21,17 @@
   "option.screenshottweet.accesstoken" : "Access Token",
   "option.screenshottweet.accesstokensecret" : "Access Token Secret",
   "option.screenshottweet.showscreenname" : "スクリーンネームを表示する",
+  "option.screenshottweet.showlogsintweetscreen" : "ログを表示する",
   "screenshottweet.gui.cancelandback" : "キャンセル",
   "screenshottweet.gui.oauthandsave" : "認証して保存",
   "screenshottweet.gui.loginsuccess" : "%s\nとしてログインしました。",
   "screenshottweet.gui.oauthscreen.loggedas" : "%sとしてログイン中",
   "screenshottweet.gui.oauthscreen.oauthloggedas" : "%sとしてログイン中",
-  "gui.screenshottweet.title" : "Screenshot Tweetの設定"
+  "gui.screenshottweet.title" : "Screenshot Tweetの設定",
+  "screenshottweet.gui.tweetstatuslabel" : "",
+  "screenshottweet.gui.tweetstatuslabel.oauth" : "認証中",
+  "screenshottweet.gui.tweetstatuslabel.oauth.ok" : "OK",
+  "screenshottweet.gui.tweetstatuslabel.uploadingimage" : "アップロード中 : %s",
+  "screenshottweet.gui.tweetstatuslabel.tweet.ok" : "ツイートしました",
+  "screenshottweet.gui.tweetstatuslabel.tweet.failed" : "ツイートに失敗しました"
 }

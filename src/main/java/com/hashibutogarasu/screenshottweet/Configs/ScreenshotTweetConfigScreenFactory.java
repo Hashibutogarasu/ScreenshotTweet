@@ -20,6 +20,7 @@ public class ScreenshotTweetConfigScreenFactory {
     public static AtomicReference<String> twitteraccesstoken;
     public static AtomicReference<String> twitteraccesstokensecret;
     public static AtomicReference<Boolean> showscreenname;
+    public static AtomicReference<Boolean> showlogsintweetscreen;
 
     public static ConfigurationBuilder cb = new ConfigurationBuilder();
     public static TwitterFactory tf = new TwitterFactory(cb.build());
@@ -42,6 +43,7 @@ public class ScreenshotTweetConfigScreenFactory {
             twitteraccesstoken = new AtomicReference<>(twitterkeyconfig.accesstoken);
             twitteraccesstokensecret = new AtomicReference<>(twitterkeyconfig.accesstokensecret);
             showscreenname = new AtomicReference<>(twitterkeyconfig.showscreenname);
+            showlogsintweetscreen = new AtomicReference<>(twitterkeyconfig.showlogsintweetscreen);
         }
         catch (Exception ignored){
 
@@ -58,6 +60,7 @@ public class ScreenshotTweetConfigScreenFactory {
                 twitterkeyconfig.accesstoken = twitteraccesstoken.get();
                 twitterkeyconfig.accesstokensecret = twitteraccesstokensecret.get();
                 twitterkeyconfig.showscreenname = showscreenname.get();
+                twitterkeyconfig.showlogsintweetscreen = showlogsintweetscreen.get();
                 twitterkeyconfig.save();
                 twitterkeyconfig.load();
             }
@@ -93,6 +96,11 @@ public class ScreenshotTweetConfigScreenFactory {
         general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("option."+ MOD_ID + ".showscreenname"),twitterkeyconfig.showscreenname)
                 .setDefaultValue(twitterkeyconfig.showscreenname)
                 .setSaveConsumer(newValue -> showscreenname.set(newValue))
+                .build());
+
+        general.addEntry(entryBuilder.startBooleanToggle(new TranslatableText("option."+ MOD_ID + ".showlogsintweetscreen"),twitterkeyconfig.showlogsintweetscreen)
+                .setDefaultValue(twitterkeyconfig.showlogsintweetscreen)
+                .setSaveConsumer(newValue -> showlogsintweetscreen.set(newValue))
                 .build());
 
         return builder.build();

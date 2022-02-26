@@ -17,6 +17,7 @@ public class ScreenshotTweetConfig {
     public String accesstoken = "";
     public String accesstokensecret = "";
     public Boolean showscreenname = true;
+    public Boolean showlogsintweetscreen = true;
 
     private ScreenshotTweetConfig() { }
 

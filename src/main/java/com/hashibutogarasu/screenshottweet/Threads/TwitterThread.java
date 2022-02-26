@@ -3,21 +3,25 @@ package com.hashibutogarasu.screenshottweet.Threads;
 import com.hashibutogarasu.screenshottweet.Configs.ScreenshotTweetConfigScreenFactory;
 import com.hashibutogarasu.screenshottweet.Ids.Id;
 import com.hashibutogarasu.screenshottweet.ScreenshotTweetModClient;
+import io.github.cottonmc.cotton.gui.widget.WLabel;
 import io.github.cottonmc.cotton.gui.widget.WSprite;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.text.TranslatableText;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 
+import static com.hashibutogarasu.screenshottweet.Configs.ScreenshotTweetConfigScreenFactory.twitterkeyconfig;
+import static com.hashibutogarasu.screenshottweet.Ids.Id.MOD_ID;
 import static com.hashibutogarasu.screenshottweet.Ids.Identifiers.*;
 import static com.hashibutogarasu.screenshottweet.guis.TweetScreenGUI.*;
 
 public class TwitterThread extends Thread {
     private boolean tweet = false;
+    private WLabel tweetstatuslabel = new WLabel(new TranslatableText(MOD_ID + "gui.tweetstatuslabel"));
+    private int defaultcolor = 0;
 
     public TwitterThread(boolean tweets){
         tweet = tweets;
@@ -32,7 +36,7 @@ public class TwitterThread extends Thread {
                 tweetimagedata.clear();
             }
 
-            imagescount.setText(new TranslatableText("screenshottweet.gui.imagescountdefault"));
+            imagescount.setText(new TranslatableText(MOD_ID + ".gui.imagescountdefault"));
             buttonManager.setEnabled(true);
 
             return;
@@ -52,7 +56,20 @@ public class TwitterThread extends Thread {
 
             ScreenshotTweetModClient.LOGGER.info("Tweet:" + tweettext.getText());
 
+
+            if(!twitterkeyconfig.showscreenname && twitterkeyconfig.showlogsintweetscreen){
+                root.add(tweetstatuslabel,13,9);
+            }
+            else{
+                root.add(tweetstatuslabel,13,10);
+            }
+
+            defaultcolor = tweetstatuslabel.getColor();
+
             try {
+
+                tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.oauth"));
+
                 ConfigurationBuilder cb = new ConfigurationBuilder();
 
                 cb.setDebugEnabled(true)
@@ -67,6 +84,8 @@ public class TwitterThread extends Thread {
                 Id.Screenname = twitter.getScreenName();
 
                 ScreenshotTweetModClient.LOGGER.info("Logged in as:" + Id.Screenname);
+
+                tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.oauth.ok"));
 
                 ArrayList<UploadedMedia> medias = new ArrayList<>();
 
@@ -96,6 +115,9 @@ public class TwitterThread extends Thread {
                                         + ", w=" + media.getImageWidth() + ", h=" + media.getImageHeight()
                                         + ", type=" + media.getImageType() + ", size=" + media.getSize());
                                 mediaIds[i] = media.getMediaId();
+
+                                tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.uploadingimage",i));
+
                             }
                             update.setMediaIds(mediaIds);
                         }
@@ -103,15 +125,19 @@ public class TwitterThread extends Thread {
                         medias.clear();
 
                         Status status = twitter.updateStatus(update);
-                        ScreenshotTweetModClient.LOGGER.info("Successfully updated the status to [" + status.getText() + "].");
 
                         Thread.sleep(2000);
+                        ScreenshotTweetModClient.LOGGER.info("Successfully updated the status to [" + status.getText() + "].");
+                        tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.tweet.ok"));
+                        tweetstatuslabel.setColor(Color.GREEN.getRGB());
                         root.remove(loadingstatusimage);
                         statusimage.setImage(OK);
                     }
                 } else {
-                    ScreenshotTweetModClient.LOGGER.info("Failed to update the status");
                     Thread.sleep(2000);
+                    ScreenshotTweetModClient.LOGGER.info("Failed to update the status");
+                    tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.tweet.failed"));
+                    tweetstatuslabel.setColor(Color.RED.getRGB());
                     root.remove(loadingstatusimage);
                     statusimage.setImage(FAILED);
                 }
@@ -119,6 +145,8 @@ public class TwitterThread extends Thread {
             catch (TwitterException twitterException) {
                 ScreenshotTweetModClient.LOGGER.info(twitterException.getErrorMessage());
                 Thread.sleep(2000);
+                tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.tweet.failed"));
+                tweetstatuslabel.setColor(Color.RED.getRGB());
                 root.remove(loadingstatusimage);
                 statusimage.setImage(FAILED);
             }
@@ -127,9 +155,12 @@ public class TwitterThread extends Thread {
             tweetimagedata.clear();
 
             imagescount.setText(new TranslatableText("screenshottweet.gui.imagescountdefault"));
+            tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel"));
             buttonManager.setEnabled(true);
         }
         catch (Exception error){
+            tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.tweet.failed"));
+            tweetstatuslabel.setColor(Color.RED.getRGB());
             root.remove(loadingstatusimage);
             statusimage.setImage(FAILED);
         }
@@ -140,6 +171,8 @@ public class TwitterThread extends Thread {
 
         }
 
+        tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel"));
+        tweetstatuslabel.setColor(defaultcolor);
         root.remove(loadingstatusimage);
         statusimage.setImage(none);
     }

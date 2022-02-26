@@ -21,9 +21,19 @@
   "option.screenshottweet.accesstoken" : "Access Token",
   "option.screenshottweet.accesstokensecret" : "Access Token Secret",
   "option.screenshottweet.showscreenname" : "Show screenname",
+  "option.screenshottweet.showlogsintweetscreen" : "Show Logs in tweetscreen",
   "screenshottweet.gui.oauthandsave" : "Oauth And Save",
   "screenshottweet.gui.loginsuccess" : "Logged as %s",
   "screenshottweet.gui.oauthscreen.loggedas" : "Loggining as %s",
   "screenshottweet.gui.oauthscreen.oauthloggedas" : "Loggining as %s",
-  "gui.screenshottweet.title" : "Screenshot Tweet Settings"
+  "gui.screenshottweet.title" : "Screenshot Tweet Settings",
+  "screenshottweet.gui.tweetstatuslabel" : "",
+  "screenshottweet.gui.tweetstatuslabel.oauth" : "Oauthing",
+  "screenshottweet.gui.tweetstatuslabel.oauth.ok" : "OK",
+  "screenshottweet.gui.tweetstatuslabel.uploadingimage" : "Uploading : %s",
+  "screenshottweet.gui.tweetstatuslabel.tweet.ok" : "Successfully update status",
+  "screenshottweet.gui.tweetstatuslabel.tweet.failed" : "Failed to tweet"
+
+
+
 }
