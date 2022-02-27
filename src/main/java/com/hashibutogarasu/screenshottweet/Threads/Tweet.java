@@ -3,7 +3,9 @@ package com.hashibutogarasu.screenshottweet.Threads;
 import com.hashibutogarasu.screenshottweet.Configs.ScreenshotTweetConfigScreenFactory;
 import com.hashibutogarasu.screenshottweet.Ids.Id;
 import com.hashibutogarasu.screenshottweet.ScreenshotTweetModClient;
+import io.github.cottonmc.cotton.gui.widget.WButton;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Util;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
@@ -30,8 +32,9 @@ public class Tweet {
         ScreenshotTweetModClient.LOGGER.info("Tweet:" + tweettext.getText());
 
         medias = new ArrayList<>();
-
         defaultcolor = tweetstatuslabel.getColor();
+
+        root.remove(linkbutton);
 
         try {
             tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.oauth"));
@@ -99,12 +102,25 @@ public class Tweet {
 
                 medias.clear();
 
-
                 Status status = twitter.updateStatus(update);
 
                 Thread.sleep(2000);
                 ScreenshotTweetModClient.LOGGER.info("Successfully updated the status to [" + status.getText() + "].");
                 tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.tweet.ok"));
+
+                linkbutton = new WButton();
+                linkbutton.setLabel(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel.tweet.link"));
+
+                linkbutton.setOnClick(()-> {
+                    try {
+                        Util.getOperatingSystem().open("https://twitter.com/" + twitter.getScreenName() + "/status/" + status.getId());
+                    } catch (TwitterException e) {
+
+                    }
+                });
+
+                root.add(linkbutton,13,10,7,10);
+
                 tweetstatuslabel.setColor(Color.GREEN.getRGB());
                 root.remove(loadingstatusimage);
                 statusimage.setImage(OK);

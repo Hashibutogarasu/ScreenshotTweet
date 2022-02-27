@@ -42,6 +42,7 @@ public class TweetScreenGUI extends LightweightGuiDescription
     public static WSprite loadingstatusimage = new WSprite(4,frame0,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame9,frame10,frame11,frame12,frame13,frame14,frame15);
     public static WSprite statusimage = new WSprite(none);
     public static WGridPanel root = new WGridPanel();
+    public static WButton linkbutton = new WButton();
     ArrayList<String> data;
     ArrayList<String> imgdata;
 

@@ -68,7 +68,6 @@ public class TwitterThread extends Thread {
 
         Default.reset();
 
-
         try {
             tweettext.refresh();
         }

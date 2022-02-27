@@ -36,5 +36,6 @@
   "screenshottweet.gui.tweetstatuslabel.tweet.ok" : "ツイートしました",
   "screenshottweet.gui.tweetstatuslabel.tweet.failed" : "ツイートに失敗しました",
   "screenshottweet.gui.tweetstatuslabel.connectionerror" : "インターネットに接続できません",
-  "screenshottweet.gui.tweetstatuslabel.nontexterror" : "テキストを空白にはできません"
+  "screenshottweet.gui.tweetstatuslabel.nontexterror" : "テキストを空白にはできません",
+  "screenshottweet.gui.tweetstatuslabel.tweet.link" : "リンクを開く"
 }
