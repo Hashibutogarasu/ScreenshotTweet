@@ -36,15 +36,16 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "io.github.cottonmc:LibGui:5.3.0+1.18"
 
-	implementation 'org.twitter4j:twitter4j-core:4.0.7'
-	include 'org.twitter4j:twitter4j-core:4.0.7'
+	modImplementation "io.github.cottonmc:LibGui:${project.LibGui_version}"
+
+	implementation "org.twitter4j:twitter4j-core:${project.twitter4j_version}"
+	include "org.twitter4j:twitter4j-core:${project.twitter4j_version}"
 
 	// Mod Menu, to add the hook for a config screen
 	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
 
-	modApi("me.shedaniel.cloth:cloth-config-fabric:6.1.48") {
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
