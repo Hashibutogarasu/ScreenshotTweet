@@ -8,10 +8,10 @@
     "Hashibutogarasu"
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "homepage": "https://github.com/Hashibutogarasu/ScreenshotTweet",
+    "sources": "https://github.com/Hashibutogarasu/ScreenshotTweet"
   },
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/screenshottweet/textures/icon.png",
   "environment": "client",
   "entrypoints": {
