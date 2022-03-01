@@ -23,6 +23,7 @@ public class Default {
     public static void reset(){
         tweetstatuslabel.setText(new TranslatableText(MOD_ID + ".gui.tweetstatuslabel"));
         tweetstatuslabel.setColor(defaultcolor);
+        tweettext.setText("");
         root.remove(loadingstatusimage);
         root.remove(tweetstatuslabel);
         statusimage.setImage(none);

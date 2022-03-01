@@ -68,13 +68,6 @@ public class TwitterThread extends Thread {
 
         Default.reset();
 
-        try {
-            tweettext.refresh();
-        }
-        catch (InterruptedException e) {
-
-        }
-
         tweetbutton.setEnabled(true);
         tweettext.setEditable(true);
     }
